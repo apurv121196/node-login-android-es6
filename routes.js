@@ -79,7 +79,7 @@ module.exports = router => {
 		if(!token || !newPassword || !token.trim() || !newPassword.trim()) {
 			console.log("#####");
 			password.resetPasswordInit(email)
-			.then(resut => res.status(result.status).json({message: result.message}))
+			.then(result => res.status(result.status).json({message: result.message}))
 			.catch(err => res.status(err.status).json({message: err.message}));
 		}else {
  

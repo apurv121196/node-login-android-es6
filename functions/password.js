@@ -6,6 +6,8 @@ const nodemailer = require('nodemailer');
 const randomstring = require('randomstring');
 const config = require('../config/config.json');
 
+
+
 exports.changePassword = (email,password,newPassword) => 
 	new Promise((resolve,reject) => {
 		user.find({email:email})
@@ -65,6 +67,7 @@ exports.resetPasswordInit = email =>
 		})
 		.then(info => {
 			console.log(info);
+			console.log("OKOKOKOKOKOKOKOKOK")
 			resolve({status:200, message: 'Check mail for instructions'});
 		})
 		.catch(err => {
