@@ -8,6 +8,7 @@ const login = require('./functions/login');
 const profile = require('./functions/profile');
 const password = require('./functions/password');
 const config = require('./config/config.json');
+const img_upload = require('./functions/image_upload');
 
 module.exports = router => {
 	router.get('/',(req,res) => res.end('Welcome to AKSAK !'));
@@ -91,6 +92,32 @@ module.exports = router => {
         }
 	});
 
+	router.post('/users/upload',(req,res) => {
+		console.log("in");
+		if(!checkToken(req)) {
+			console.log("token checked !");
+			img_upload.uploadImage(req)
+				.then(result => res.status(result.status).json({message:result.message}))
+				.catch(err => res.status(err.status).json({message:err.message}));
+		} else{
+			console.log("wrong Token !")
+		}
+	});
+
+	router.get('/users/uploads/:file',(req,res) => {
+		if(!checkToken(req)) {
+			img_upload.retrieveImage(req)
+				.then(result => {
+					res.writeHead(200, {'Content-Type': 'image/jpg' });
+					res.end(result.img, 'binary');
+				})
+				.catch(err => res.status(err.status).json({message:err.message}));
+		}
+		else{
+			console.log("wrong Token !")
+		}
+	});
+
 	const checkToken = req => {
 		const token = req.headers['x-access-token'];
 		if(token) {
@@ -98,10 +125,14 @@ module.exports = router => {
 				var decoded = jwt.verify(token,config.secret);
 				return decoded.message === req.params.id;
 			} catch(err) {
+				console.log("decoding error !");
 				return false;
+				
 			}
 		} else {
+			console.log("no token !");
 			return false;
+			
 		}
 	}
 }
