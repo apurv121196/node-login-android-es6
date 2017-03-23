@@ -102,8 +102,9 @@ module.exports = router => {
 		// } else{
 		// 	console.log("wrong Token !")
 		// }
-		console.log("Manjeet Bhiya !")
-		res.status(200).json({message:"Uploaded Successfully !"});
+		// console.log("Manjeet Bhiya !")
+		// res.status(200).json({message:"Uploaded Successfully !"});
+		res.send("Done");
 	});
 
 	router.get('/users/uploads/:file',(req,res) => {
