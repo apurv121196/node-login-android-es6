@@ -3,7 +3,7 @@ const fs = require('fs');
 const dirname = "/home/swachh-bharat/file-upload";
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
-		const fstream;
+		var fstream;
 		req.pipe(req.busboy);
 		 req.busboy.on('file', function (fieldname, file, filename) {
         console.log("Uploading: " + filename); 
@@ -11,9 +11,9 @@ exports.uploadImage = (req) =>
         file.pipe(fstream);
         fstream.on('close', function () {
             res.redirect('back');
-        });
-	});
+        	});
 		});
+	});
 
 exports.retrieveImage = req => 
 	new Promise((resolve,reject) => {
