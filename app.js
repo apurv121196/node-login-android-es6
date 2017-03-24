@@ -6,10 +6,12 @@ const express = require('express');
 const app = express();
 const bodyParser = require('body-parser');
 const logger = require('morgan');
+const multer = require('multer');
 const router = express.Router();
 const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
+var upload = multer({ dest: '/tmp/'});
 app.use(logger('dev'));
 
 require('./routes')(router);
