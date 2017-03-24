@@ -13,6 +13,7 @@ exports.uploadImage = (req) =>
             res.redirect('back');
         });
 	});
+		});
 
 exports.retrieveImage = req => 
 	new Promise((resolve,reject) => {
