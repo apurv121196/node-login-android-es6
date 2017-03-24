@@ -132,7 +132,7 @@ module.exports = router => {
 	router.get('/abcd',(req,res) => {
 		console.log('abcd#!@#$');
 		fun.func()
-		.then(res.send("hao  !"));
+		.then(() => res.send("hao  !"));
 	});
 
 	const checkToken = req => {
