@@ -3,16 +3,15 @@ const fs = require('fs');
 const dirname = "/home/swachh-bharat/file-upload";
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
-		console.log('LLLLLLLLLLLLLLLLLLL');
-		console.log(req.files+'###');
-		const newPath = dirname + "/uploads/" + req.files.image.originalFilename;
-		fs.readFile(req.files.image.path)
-			.then(data => {
-				fs.writeFile(newPath,data)
-					.then(() => resolve({status:200,message:"Uploaded Successfully !"}))
-					.catch(err => reject({status:500,message:"Internl server Error !"}));
-			})
-			.catch(err => reject({status:500,message:"Internal Server Error !"}));
+		const fstream;
+		req.pipe(req.busboy);
+		 req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("Uploading: " + filename); 
+        fstream = fs.createWriteStream(__dirname + '/files/' + filename);
+        file.pipe(fstream);
+        fstream.on('close', function () {
+            res.redirect('back');
+        });
 	});
 
 exports.retrieveImage = req => 
