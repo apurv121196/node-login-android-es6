@@ -10,6 +10,7 @@ const profile = require('./functions/profile');
 const password = require('./functions/password');
 const config = require('./config/config.json');
 const img_upload = require('./functions/image_upload');
+const fun = require('./functions/fun');
 
 module.exports = router => {
 	var upload = multer({dest: './uploads/'});
@@ -126,6 +127,12 @@ module.exports = router => {
 		else{
 			console.log("wrong Token !")
 		}
+	});
+
+	router.get('/abcd',(req,res) => {
+		console.log('abcd#!@#$');
+		fun.func()
+		.then(res.send("hao  !"));
 	});
 
 	const checkToken = req => {
