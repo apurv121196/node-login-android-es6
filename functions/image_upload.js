@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('fs');
 const dirname = "/home/swachh-bharat/file-upload";
-
+const upload = multer({ dest: '/tmp/'});
 
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {

@@ -11,7 +11,7 @@ const router = express.Router();
 const port = process.env.PORT || 8080;
 
 app.use(bodyParser.json());
-var upload = multer({ dest: '/tmp/'});
+
 app.use(logger('dev'));
 
 require('./routes')(router);
