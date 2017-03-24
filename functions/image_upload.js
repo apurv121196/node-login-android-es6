@@ -27,6 +27,7 @@ exports.uploadImage = (req) =>
 exports.retrieveImage = req => 
 	new Promise((resolve,reject) => {
 		const file = req.params.file;
+		console.log('inside retrieve !');
 		fs.readFileSync(__dirname+"/"+file)
 			.then(img => resolve({status:200,message:"Fetched Image !","data":img}))
 			.catch(err => reject({status:500,message:"Error reading file !"}));
