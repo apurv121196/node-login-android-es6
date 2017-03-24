@@ -3,6 +3,7 @@
 const auth = require('basic-auth');
 const jwt = require('jsonwebtoken');
 
+var multer = require('multer');
 const register = require('./functions/register');
 const login = require('./functions/login');
 const profile = require('./functions/profile');
@@ -11,6 +12,8 @@ const config = require('./config/config.json');
 const img_upload = require('./functions/image_upload');
 
 module.exports = router => {
+	var upload = multer({dest: './uploads/'});
+
 	router.get('/',(req,res) => res.end('Welcome to AKSAK !'));
 	router.post('/authenticate',(req,res) => {
 		const credentials = auth(req);
@@ -105,24 +108,8 @@ module.exports = router => {
 		// console.log("Manjeet Bhiya !")
 		// res.status(200).json({message:"Uploaded Successfully !"});
 		// res.send("Done");
-		// get the temporary location of the file
-    console.log(req.files+'#######');
-    var tmp_path = req.files.userPhoto.path;
-    // set where the file should actually exists 
-    var target_path = '/Users/narendra/Documents/Workspaces/NodeExpressWorkspace/MongoExpressUploads/profile_pic/' + req.files.userPhoto.name;
-    // move the file from the temporary location to the intended location
-    fs.rename(tmp_path, target_path, function(err) {
-        if (err) throw err;
-        // delete the temporary file, so that the explicitly set temporary upload dir does not get filled with unwanted files
-        fs.unlink(tmp_path, function() {
-            if (err) {
-                throw err;
-            }else{
-                    var profile_pic = req.files.userPhoto.name;
-                    //use profile_pic to do other stuffs like update DB or write rendering logic here.
-             };
-            });
-        });
+		console.log('files:', req.file);
+    console.log('body:', req.body);
 	});
 
 	router.get('/users/uploads/:file',(req,res) => {
