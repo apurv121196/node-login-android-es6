@@ -92,7 +92,7 @@ module.exports = router => {
         }
 	});
 
-	router.post('/users/:email/upload',(req,res) => {
+	router.post('/users/:id/upload',(req,res) => {
 		// console.log("in");
 		if(checkToken(req)) {
 			console.log("token checked !");
