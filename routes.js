@@ -3,7 +3,7 @@
 const auth = require('basic-auth');
 const jwt = require('jsonwebtoken');
 
-// var multer = require('multer');
+var multer = require('multer');
 const register = require('./functions/register');
 const login = require('./functions/login');
 const profile = require('./functions/profile');
@@ -12,7 +12,7 @@ const config = require('./config/config.json');
 const img_upload = require('./functions/image_upload');
 
 module.exports = router => {
-	// var upload = multer({dest: './uploads/'});
+	var upload = multer({dest: './uploads/'});
 
 	router.get('/',(req,res) => res.end('Welcome to AKSAK !'));
 	router.post('/authenticate',(req,res) => {
