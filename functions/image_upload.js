@@ -1,18 +1,22 @@
 'use strict';
 const fs = require('fs');
 const dirname = "/home/swachh-bharat/file-upload";
+const multer = require('multer');
+var upload = multer({ dest: '/tmp/'});
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
-		var fstream;
-		req.pipe(req.busboy);
-		 req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename); 
-        fstream = fs.createWriteStream(__dirname + '/files/' + filename);
-        file.pipe(fstream);
-        fstream.on('close', function () {
-            res.redirect('back');
-        	});
-		});
+		var file = __dirname + '/' + req.file.filename;
+  fs.rename(req.file.path, file, function(err) {
+    if (err) {
+      console.log(err);
+      res.send(500);
+    } else {
+      res.json({
+        message: 'File uploaded successfully',
+        filename: req.file.filename
+      });
+    }
+  });
 	});
 
 exports.retrieveImage = req => 
