@@ -126,6 +126,7 @@ module.exports = router => {
 		if(token) {
 			try {
 				var decoded = jwt.verify(token,config.secret);
+				console.log(req.params.id+'   '+decoded.message);
 				return decoded.message === req.params.id;
 			} catch(err) {
 				console.log("decoding error !");
