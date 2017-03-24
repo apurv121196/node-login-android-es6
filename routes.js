@@ -95,7 +95,7 @@ module.exports = router => {
         }
 	});
 
-	router.post('/users/:id/upload',upload.single("file"),(req,res) => {
+	router.post('/users/:id/upload',(req,res) => {
 		// console.log("in");
 		// if(checkToken(req)) {
 		// 	console.log("token checked !");
