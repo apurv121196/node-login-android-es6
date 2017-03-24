@@ -1,8 +1,8 @@
 'use strict';
 const fs = require('fs');
 const dirname = "/home/swachh-bharat/file-upload";
-const multer = require('multer');
-var upload = multer({ dest: '/tmp/'});
+
+
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
 		console.log('inside  '+req.file);
