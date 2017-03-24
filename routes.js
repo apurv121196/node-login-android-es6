@@ -10,6 +10,10 @@ const password = require('./functions/password');
 const config = require('./config/config.json');
 const img_upload = require('./functions/image_upload');
 
+
+const multer = require('multer');
+const upload = multer({ dest: '/tmp/'});
+
 module.exports = router => {
 	router.get('/',(req,res) => res.end('Welcome to AKSAK !'));
 	router.post('/authenticate',(req,res) => {
