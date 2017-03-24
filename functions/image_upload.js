@@ -1,12 +1,15 @@
 'use strict';
 const fs = require('fs');
+const util = require('util');
 const dirname = "/home/swachh-bharat/file-upload";
 
 
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
-		console.log('inside  '+req.file);
+		// console.log('inside  '+req.file);
+		console.log('inside '+util.inspect(myObject, false, null))
 		var file = __dirname + '/' + req.file.filename;
+		console.log(file+'###');
   fs.rename(req.file.path, file, function(err) {
     if (err) {
       console.log(err);
