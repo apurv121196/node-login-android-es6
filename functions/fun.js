@@ -9,7 +9,7 @@ exports.func = () => {
  
 // var path = process.argv[2];
 
-var path = '/tmp/';
+var path = '/app/functions/';
  
 fs.readdir(path, function(err, items) {
     console.log(items);
