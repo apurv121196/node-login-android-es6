@@ -131,8 +131,7 @@ module.exports = router => {
 
 	router.get('/abcd',(req,res) => {
 		console.log('abcd#!@#$');
-		fun.func()
-		.then(() => res.send("hao  !"));
+		fun.func();
 	});
 
 	const checkToken = req => {
