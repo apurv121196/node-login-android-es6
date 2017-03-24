@@ -113,7 +113,7 @@ module.exports = router => {
 	});
 
 	router.get('/users/uploads/:file',(req,res) => {
-		if(checkToken(req)) {
+		if(!checkToken(req)) {
 			img_upload.retrieveImage(req)
 				.then(result => {
 					res.writeHead(200, {'Content-Type': 'image/jpg' });
