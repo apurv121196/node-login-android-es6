@@ -96,20 +96,20 @@ module.exports = router => {
 	});
 
 	router.post('/users/:id/upload', upload.single('file') ,(req,res) => {
-		// console.log("in");
-		// if(checkToken(req)) {
-		// 	console.log("token checked !");
-		// 	img_upload.uploadImage(req)
-		// 		.then(result => res.status(result.status).json({message:result.message}))
-		// 		.catch(err => res.status(err.status).json({message:err.message}));
-		// } else{
-		// 	console.log("wrong Token !")
-		// }
+		console.log("in");
+		if(checkToken(req)) {
+			console.log("token checked !");
+			img_upload.uploadImage(req)
+				.then(result => res.status(result.status).json({message:result.message}))
+				.catch(err => res.status(err.status).json({message:err.message}));
+		} else{
+			console.log("wrong Token !")
+		}
 		// console.log("Manjeet Bhiya !")
 		// res.status(200).json({message:"Uploaded Successfully !"});
 		// res.send("Done");
-		console.log('files:', req.file);
-    console.log('body:', req.body);
+		// console.log('files:', req.file);
+  //   console.log('body:', req.body);
 	});
 
 	router.get('/users/uploads/:file',(req,res) => {
