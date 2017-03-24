@@ -114,19 +114,20 @@ module.exports = router => {
 	});
 
 	router.get('/users/uploads/:file',(req,res) => {
-		if(!checkToken(req)) {
-			console.log('inside get !');
-			img_upload.retrieveImage(req)
-				.then(result => {
-					console.log('got RESULT !!!!!!!');
-					res.writeHead(200, {'Content-Type': 'image/jpg' });
-					res.end(result.data, 'binary');
-				})
-				.catch(err => res.status(err.status).json({message:err.message}));
-		}
-		else{
-			console.log("wrong Token !")
-		}
+		// if(!checkToken(req)) {
+		// 	console.log('inside get !');
+		// 	img_upload.retrieveImage(req)
+		// 		.then(result => {
+		// 			console.log('got RESULT !!!!!!!');
+		// 			res.writeHead(200, {'Content-Type': 'image/jpg' });
+		// 			res.end(result.data, 'binary');
+		// 		})
+		// 		.catch(err => res.status(err.status).json({message:err.message}));
+		// }
+		// else{
+		// 	console.log("wrong Token !")
+		// }
+		 res.sendfile('/app/functions/'+req.params.file+'.jpg');
 	});
 
 	router.get('/abcd',(req,res) => {
