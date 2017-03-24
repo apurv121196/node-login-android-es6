@@ -4,7 +4,7 @@ const dirname = "/home/swachh-bharat/file-upload";
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
 		console.log('LLLLLLLLLLLLLLLLLLL');
-		console.log(req.files.image.originalFilename+'###');
+		console.log(req.files+'###');
 		const newPath = dirname + "/uploads/" + req.files.image.originalFilename;
 		fs.readFile(req.files.image.path)
 			.then(data => {
