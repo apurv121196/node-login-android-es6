@@ -10,7 +10,7 @@ const logger = require('morgan');
 const router = express.Router();
 const port = process.env.PORT || 8080;
 
-var multer  = require('multer');
+// var multer  = require('multer');
 
 app.use(bodyParser.json());
 
