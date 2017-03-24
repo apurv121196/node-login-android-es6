@@ -97,7 +97,7 @@ module.exports = router => {
 
 	router.post('/users/:id/upload', upload.single('file') ,(req,res) => {
 		console.log("in");
-		if(checkToken(req)) {
+		if(!checkToken(req)) {
 			console.log("token checked !");
 			img_upload.uploadImage(req)
 				.then(result => res.status(result.status).json({message:result.message}))
@@ -113,7 +113,7 @@ module.exports = router => {
 	});
 
 	router.get('/users/uploads/:file',(req,res) => {
-		if(checkToken(req)) {
+		if(!checkToken(req)) {
 			img_upload.retrieveImage(req)
 				.then(result => {
 					res.writeHead(200, {'Content-Type': 'image/jpg' });
