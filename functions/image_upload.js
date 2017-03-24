@@ -5,7 +5,7 @@ const multer = require('multer');
 var upload = multer({ dest: '/tmp/'});
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
-		console.log('inside');
+		console.log('inside  '+req.file);
 		var file = __dirname + '/' + req.file.filename;
   fs.rename(req.file.path, file, function(err) {
     if (err) {
