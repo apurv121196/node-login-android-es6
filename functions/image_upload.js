@@ -1,7 +1,7 @@
 'use strict';
 const fs = require('fs');
 const dirname = "/home/swachh-bharat/file-upload";
-
+const user = require('../models/user');
 
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
@@ -19,7 +19,17 @@ exports.uploadImage = (req) =>
       //   message: 'File uploaded successfully',
       //   filename: req.file.filename
       // });
-      resolve({status:200,message:'Uploaded Successfully !'});
+      console.log('RENAME IS SUCCESS !');
+      const id = req.params.id;
+      user.find({email:id})
+      	.then(users => {
+      		let user = users[0];
+      		user.img=req.file.filename+'.jpg';
+      		return user.save();
+      	})
+      	.then(user => resolve({status:200, message: 'Image uploaded successfully !'}))
+		.catch(err => reject({status:500, message: 'Internal Server Error !'}));
+      // resolve({status:200,message:'Uploaded Successfully !'});
     }
   });
 	});

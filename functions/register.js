@@ -14,6 +14,7 @@ exports.registerUser = (name, email, password) =>
  
             name: name,
             email: email,
+            img:"",
             hashed_password: hash,
             created_at: new Date()
         });
