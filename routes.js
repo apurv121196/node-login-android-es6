@@ -127,7 +127,7 @@ module.exports = router => {
 		// else{
 		// 	console.log("wrong Token !")
 		// }
-		res.writeHead(200, {'Content-Type': 'image/jpg' });
+		// res.writeHead(200, {'Content-Type': 'image/jpg' });
 		 res.sendfile('/app/functions/'+req.params.file);
 	});
 
