@@ -51,6 +51,7 @@ module.exports = router => {
 	});
 
 	router.get('/users/:id', (req,res) => {
+		console.log('AKSAK');
 		if(checkToken(req)) {
 			profile.getProfile(req.params.id)
 			.then(result => res.status(200).json(result))
@@ -61,7 +62,7 @@ module.exports = router => {
 	});
 
 	router.put('/users/:id',(req,res) => {
-		console.log('AKSAK');
+
 		if(checkToken(req)) {
 			const oldPassword = req.body.password;
 			const newPassword = req.body.newPassword;
