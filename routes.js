@@ -11,6 +11,7 @@ const password = require('./functions/password');
 const config = require('./config/config.json');
 const img_upload = require('./functions/image_upload');
 const fun = require('./functions/fun');
+const newsfeed = require('./functions/newsfeed');
 
 module.exports = router => {
 	var upload = multer({dest: './uploads/'});
@@ -98,7 +99,7 @@ module.exports = router => {
 
 	router.post('/users/:id/upload', upload.single('file') ,(req,res) => {
 		console.log("in");
-		if(checkToken(req)) {
+		if(!checkToken(req)) {
 			console.log("token checked !");
 			img_upload.uploadImage(req)
 				.then(result => res.status(result.status).json({message:result.message}))
@@ -128,12 +129,50 @@ module.exports = router => {
 		// 	console.log("wrong Token !")
 		// }
 		// res.writeHead(200, {'Content-Type': 'image/jpg' });
-		 res.sendfile('/app/functions/'+req.params.file);
+		 res.sendfile('/app/functions/'+req.params.file+'.json');
+		 // res.sendfile(req.params.file+'.json');
+		// res.json();
+	});
+
+	router.get('/newsfeed',(req,res) => {
+		if(!checkToken(req)) {
+			console.log('inside news');
+			newsfeed.newsFeed()
+				.then(result => res.status(result.status).json({result:result.result}))
+				.catch(err => res.status(err.status).json({message:err.message}));
+		}
+	});
+
+	router.post('/newsfeed',upload.single('file') ,(req,res) => {
+		console.log(req.file+'######');
+		if(!checkToken(req)) {
+
+			newsfeed.postNewsFeed(req.body.title,req.body.desc,req)
+				.then(result => res.status(result.status).json({result:result.message}))
+				.catch(err => res.status(err.status).json({message:err.message}));
+		}
 	});
 
 	router.get('/abcd',(req,res) => {
 		console.log('abcd#!@#$');
 		fun.func();
+	});
+
+	router.post('/users/upload', upload.single('file') ,(req,res) => {
+		console.log("in");
+		if(!checkToken(req)) {
+			console.log("token checked !");
+			img_upload.uploadImage(req)
+				.then(result => res.status(result.status).json({message:result.message}))
+				.catch(err => res.status(err.status).json({message:err.message}));
+		} else{
+			console.log("wrong Token !")
+		}
+		// console.log("Manjeet Bhiya !")
+		// res.status(200).json({message:"Uploaded Successfully !"});
+		// res.send("Done");
+		// console.log('files:', req.file);
+  //   console.log('body:', req.body);
 	});
 
 	const checkToken = req => {

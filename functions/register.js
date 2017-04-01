@@ -2,11 +2,11 @@
  
 const user = require('../models/user');
 const bcrypt = require('bcryptjs');
- 
+const mongoose = require('mongoose');
 exports.registerUser = (name, email, password) => 
  
     new Promise((resolve,reject) => {
- 
+ 		const imgId = mongoose.Types.ObjectId();
         const salt = bcrypt.genSaltSync(10);
         const hash = bcrypt.hashSync(password, salt);
 
@@ -14,7 +14,7 @@ exports.registerUser = (name, email, password) =>
  
             name: name,
             email: email,
-            img:"",
+            img:imgId,
             hashed_password: hash,
             created_at: new Date()
         });
