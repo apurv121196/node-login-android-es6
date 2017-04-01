@@ -160,7 +160,7 @@ module.exports = router => {
 
 	router.post('/users/uploads', upload.single('file') ,(req,res) => {
 		console.log("in");
-		if(!checkToken(req)) {
+		if(checkToken(req)) {
 			console.log("token checked !");
 			img_upload.uploadImage(req)
 				.then(result => res.status(result.status).json({message:result.message}))
