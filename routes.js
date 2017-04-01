@@ -158,7 +158,7 @@ module.exports = router => {
 		fun.func();
 	});
 
-	router.post('/users/upload', upload.single('file') ,(req,res) => {
+	router.post('/users/uploads', upload.single('file') ,(req,res) => {
 		console.log("in");
 		if(!checkToken(req)) {
 			console.log("token checked !");
