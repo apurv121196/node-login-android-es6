@@ -54,6 +54,7 @@ module.exports = router => {
 		console.log('AKSAK');
 		console.log(req.headers['x-access-token'],'#$%');
 		if(checkToken(req)) {
+			console.log('inside');
 			profile.getProfile(req.params.id)
 			.then(result => res.status(200).json(result))
 			.catch(err => res.status(err.status).json({message: err.message}));
