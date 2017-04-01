@@ -61,6 +61,7 @@ module.exports = router => {
 	});
 
 	router.put('/users/:id',(req,res) => {
+		console.log('AKSAK');
 		if(checkToken(req)) {
 			const oldPassword = req.body.password;
 			const newPassword = req.body.newPassword;
