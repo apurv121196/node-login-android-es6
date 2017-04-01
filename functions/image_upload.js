@@ -5,7 +5,7 @@ const user = require('../models/user');
 
 exports.uploadImage = (req) => 
 	new Promise((resolve, reject) => {
-		// console.log(JSON.stringify(req.file));
+		console.log(JSON.stringify(req.file));
 		// console.log('inside '+util.inspect(myObject, false, null));
 		var file = __dirname + '/' + req.file.filename + '.jpg';
 		console.log(file+'###');
