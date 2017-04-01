@@ -115,6 +115,7 @@ module.exports = router => {
 	});
 
 	router.get('/users/uploads/:file',(req,res) => {
+		console.log('AAAAA');
 		// if(!checkToken(req)) {
 		// 	console.log('inside get !');
 		// 	img_upload.retrieveImage(req)
@@ -159,7 +160,7 @@ module.exports = router => {
 	});
 
 	router.post('/users/uploads', upload.single('file') ,(req,res) => {
-		console.log("in");
+		console.log("in users/uploads");
 		if(checkToken(req)) {
 			console.log("token checked !");
 			img_upload.uploadImage(req)
