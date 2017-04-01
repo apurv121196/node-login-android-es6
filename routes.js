@@ -52,7 +52,7 @@ module.exports = router => {
 
 	router.get('/users/:id', (req,res) => {
 		console.log('AKSAK');
-		console.log(req.headers['x-access-token'],'#$%');
+		console.log(req.header['x-access-token'],'#$%');
 		if(checkToken(req)) {
 			profile.getProfile(req.params.id)
 			.then(result => res.status(200).json(result))
