@@ -53,7 +53,7 @@ module.exports = router => {
 	router.get('/users/:id', (req,res) => {
 		console.log('AKSAK');
 		console.log(req.headers['x-access-token'],'#$%');
-		if(checkToken(req)) {
+		if(!checkToken(req)) {
 			console.log('inside');
 			profile.getProfile(req.params.id)
 			.then(result => res.status(200).json(result))
@@ -103,7 +103,7 @@ module.exports = router => {
 
 	router.post('/users/:id/upload', upload.single('file') ,(req,res) => {
 		console.log('in');
-		if(checkToken(req)) {
+		if(!checkToken(req)) {
 			console.log("token checked !");
 			img_upload.uploadImage(req)
 				.then(result => res.status(result.status).json({message:result.message}))
@@ -134,7 +134,7 @@ module.exports = router => {
 		// 	console.log("wrong Token !")
 		// }
 		// res.writeHead(200, {'Content-Type': 'image/jpg' });
-		 res.sendfile('/app/functions/'+req.params.file+'.jpg');
+		 res.sendfile('./app/functions/'+req.params.file);
 		 // res.sendfile(req.params.file+'.json');
 		// res.json();
 	});
@@ -143,7 +143,7 @@ module.exports = router => {
 		if(!checkToken(req)) {
 			console.log('inside news');
 			newsfeed.newsFeed()
-				.then(result => res.status(result.status).json({result:result.result}))
+				.then(result => res.status(result.status).json(result.result))
 				.catch(err => res.status(err.status).json({message:err.message}));
 		}
 	});
@@ -179,6 +179,8 @@ module.exports = router => {
 		// console.log('files:', req.file);
   //   console.log('body:', req.body);
 	});
+
+	
 
 	const checkToken = req => {
 		const token = req.headers['x-access-token'];

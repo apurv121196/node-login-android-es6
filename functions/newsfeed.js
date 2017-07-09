@@ -40,7 +40,7 @@ exports.postNewsFeed = (title,desc,imgURL,req) =>
 		desc:desc,
 		imgURL:'news'+id,
 		createdAt:new Date(),
-		likes:0
+		likes:Array
 	});
 
 
